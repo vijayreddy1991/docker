@@ -8,7 +8,7 @@ resources:
 #         include: docker
       buildOn:
          commit: false
-      sha: gitter
+      sha: docker
       
   - name: docker_Build
     type: BuildInfo
