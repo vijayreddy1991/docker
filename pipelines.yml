@@ -4,8 +4,8 @@ resources:
     configuration:
       path: vijayreddy1991/docker
       gitProvider: vijay_github
-      branches:
-        include: docker
+#       branches:
+#         include: docker
       buildOn:
          commit: false
       sha: docker
