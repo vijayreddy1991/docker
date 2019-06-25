@@ -13,28 +13,28 @@ resources:
   - name: docker_Build
     type: BuildInfo
     configuration:
-      sourceArtifactory: varsha_artifactory
+      sourceArtifactory: bindu_arti
       buildNumber: 1
       buildName: dockertest  
       
   - name: docker_build_promote
     type: BuildInfo
     configuration:
-      sourceArtifactory: varsha_artifactory
+      sourceArtifactory: bindu_arti
       buildNumber: 1
       buildName: dockertest
       
   - name: docker_release_Bundle
     type: ReleaseBundle
     configuration:
-      sourceArtifactory: varsha_artifactory
+      sourceArtifactory: bindu_arti
       name: test_1
       version: v1.0  
       
   - name: docker_release_Bundle2
     type: ReleaseBundle
     configuration:
-      sourceArtifactory: varsha_artifactory
+      sourceArtifactory: bindu_arti
       name: dockertest
       version: foo
       isSigned: false     
@@ -42,7 +42,7 @@ resources:
   - name: docker_distribution
     type: DistributionRule
     configuration:
-      sourceArtifactory: varsha_artifactory
+      sourceArtifactory: bindu_arti
       cityName: "*"
       serviceName: "*"
       siteName: "*"
@@ -62,7 +62,7 @@ pipelines:
           dockerImageName: 34.66.110.173/bindu_local/vijay  # required 
           dockerImageTag: master #myimage_$pipeline_name.$run_number   # required
           integrations:
-            - name: varsha_artifactory
+            - name: bindu_arti
           inputResources:
             - name: dockerbuild    # required
 #             - artifactoryFileSpec      # optional
@@ -84,7 +84,7 @@ pipelines:
           nodePool: ubuntu16
           targetRepository: bindu_local  #required
           integrations:
-            - name: varsha_artifactory    # required
+            - name: bindu_arti    # required
           inputSteps:
             - name: dockerBuild     # required
 #           outputResources:
