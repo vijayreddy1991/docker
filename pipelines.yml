@@ -59,7 +59,7 @@ pipelines:
           # for docker:
           dockerFileLocation: . # required
           dockerFileName: Dockerfile     # required
-          dockerImageName: 34.66.110.173:8081/bindu_local/vijay  # required 
+          dockerImageName: 34.66.110.173/bindu_local/vijay  # required 
           dockerImageTag: myimage_$pipeline_name.$run_number   # required
           integrations:
             - name: varsha_artifactory
