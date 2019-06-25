@@ -119,7 +119,7 @@ pipelines:
         configuration:
           nodePool: ubuntu16
           releaseBundleName: test_new_releaseb
-          releaseBundleVersion: v1.5
+          releaseBundleVersion: v2.0.0
           dryRun: false
           sign: false
           description: "testdocker description"
