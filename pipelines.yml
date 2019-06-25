@@ -8,7 +8,7 @@ resources:
 #         include: docker
       buildOn:
          commit: false
-      sha: gitter1
+      sha: master
       
   - name: docker_Build
     type: BuildInfo
@@ -119,7 +119,7 @@ pipelines:
         configuration:
           nodePool: ubuntu16
           releaseBundleName: test_new_releaseb
-          releaseBundleVersion: v2.0.2
+          releaseBundleVersion: v2.0.3
           dryRun: false
           sign: false
           description: "testdocker description"
