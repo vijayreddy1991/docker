@@ -8,7 +8,7 @@ resources:
 #         include: docker
       buildOn:
          commit: false
-      sha: docker
+      sha: master
       
   - name: docker_Build
     type: BuildInfo
