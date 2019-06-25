@@ -39,15 +39,15 @@ resources:
       version: foo
       isSigned: false     
 
-  - name: docker_distribution
-    type: DistributionRule
-    configuration:
-      sourceArtifactory: bindu_arti
-      cityName: "*"
-      serviceName: "*"
-      siteName: "*"
-      countryCodes:
-        - CN
+#   - name: docker_distribution
+#     type: DistributionRule
+#     configuration:
+#       sourceArtifactory: bindu_arti
+#       cityName: "*"
+#       serviceName: "*"
+#       siteName: "*"
+#       countryCodes:
+#         - CN
 
 pipelines: 
   - name: docker
@@ -119,7 +119,7 @@ pipelines:
         configuration:
           nodePool: ubuntu16
           releaseBundleName: test_new_releaseb
-          releaseBundleVersion: v2.0.0
+          releaseBundleVersion: v2.0.1
           dryRun: false
           sign: false
           description: "testdocker description"
@@ -142,11 +142,11 @@ pipelines:
           outputResources:
             - name: docker_release_Bundle2
             
-      - name: dockerDistribute
-        type: DistributeReleaseBundle
-        configuration:
-          nodePool: ubuntu16
-          dryRun: false
-          inputResources:
-            - name: docker_distribution
-            - name: docker_release_Bundle2
+#       - name: dockerDistribute
+#         type: DistributeReleaseBundle
+#         configuration:
+#           nodePool: ubuntu16
+#           dryRun: false
+#           inputResources:
+#             - name: docker_distribution
+#             - name: docker_release_Bundle2
