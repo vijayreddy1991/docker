@@ -4,17 +4,39 @@ resources:
     configuration:
       gitProvider: vijay_github
       path: vijayreddy1991/docker
-      sha: maven
+      sha: maven   
       
-  - name: mvn_Build
+  - name: maven_Build
     type: BuildInfo
     configuration:
       sourceArtifactory: vijay_artifactory
       buildNumber: 1
       buildName: mvntest
+      
+  - name: maven_build_promote
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: vijay_artifactory
+      buildNumber: 1
+      buildName: mvntest   
+      
+  - name: mvn_releaseBundle
+    type: ReleaseBundle
+    configuration:
+      sourceArtifactory: vijay_artifactory
+      name: testmvn
+      version: v0.1      
+      
+  - name: mvn_releaseBundleSig
+    type: ReleaseBundle
+    configuration:
+      sourceArtifactory: vijay_artifactory
+      name: mvntest
+      version: v0.2
+      isSigned: false      
 
 pipelines:
-  - name: maven_pipeline
+  - name: pipeline_mvn
     steps:
       - name: mavenBuild
         type: MvnBuild
@@ -36,6 +58,9 @@ pipelines:
                 options: ""
         execution:
           onStart:
+            - printenv
+           - pushd $res_mymvn_project_resourcePath
+            - ls -la
             - apt install default-jdk
             - pushd /tmp 
             - wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
@@ -46,9 +71,9 @@ pipelines:
             - java -version
             - mvn --version
           onSuccess:
-            - echo "success"
+            - echo "sucess"
 
-      - name: maven_publish
+      - name: mavenpublish
         type: PublishBuildInfo
         configuration:
           inputSteps:
@@ -57,4 +82,40 @@ pipelines:
             - name: maven_Build
         execution:
           onSuccess:
-            - echo "success"
+            - echo "print"
+            
+      - name: mavenPromote
+        type: PromoteBuild
+        configuration:
+          targetRepository: test-maven-local
+          inputResources:
+            - name: mvn_Build
+          outputResources:
+            - name: maven_build_promote
+            
+      - name: mavenCreatebundle
+        type: CreateReleaseBundle
+        configuration:
+          releaseBundleName: mvnbundle
+          releaseBundleVersion: v1.1.1
+          dryRun: false
+          sign: false
+          description: "test mvn description"
+          inputResources:
+            - name: maven_build_promote
+          outputResources:
+            - name: maven_release_Bundle
+          releaseNotes:
+            syntax: markdown
+            content: |
+              ## Heading
+                * Bullet
+                * Points
+                
+      - name: mavenSign
+        type: SignReleaseBundle
+        configuration:
+          inputResources:
+            - name: maven_release_Bundle
+          outputResources:
+            - name: maven_release_BundleSig             
