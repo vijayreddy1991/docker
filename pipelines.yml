@@ -36,7 +36,7 @@ resources:
       isSigned: false      
 
 pipelines:
-  - name: pipeline_mvn
+  - name: maven_pipeline
     steps:
       - name: mavenBuild
         type: MvnBuild
