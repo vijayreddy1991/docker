@@ -20,14 +20,14 @@ resources:
       buildNumber: 1
       buildName: mvntest   
       
-  - name: mvn_releaseBundle
+  - name: maven_release_Bundle
     type: ReleaseBundle
     configuration:
       sourceArtifactory: vijay_artifactory
       name: testmvn
       version: v0.1      
       
-  - name: mvn_releaseBundleSig
+  - name: maven_release_BundleSig
     type: ReleaseBundle
     configuration:
       sourceArtifactory: vijay_artifactory
