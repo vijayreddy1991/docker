@@ -108,7 +108,7 @@ pipelines:
         type: PromoteBuild
         configuration:
           nodePool: ubuntu16
-          targetRepository: bindu_local
+          targetRepository: test-docker-local
           inputResources:
             - name: docker_Build
           outputResources:
