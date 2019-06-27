@@ -4,7 +4,7 @@ resources:
     configuration:
       gitProvider: vijay_github
       path: vijayreddy1991/docker
-      sha: 
+      sha: maven
       
   - name: mvn_Build
     type: BuildInfo
