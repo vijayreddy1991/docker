@@ -13,28 +13,28 @@ resources:
   - name: docker_Build
     type: BuildInfo
     configuration:
-      sourceArtifactory: bindu_arti
+      sourceArtifactory: vijay_artifactory
       buildNumber: 1
       buildName: dockertest  
       
   - name: docker_build_promote
     type: BuildInfo
     configuration:
-      sourceArtifactory: bindu_arti
+      sourceArtifactory: vijay_artifactory
       buildNumber: 1
       buildName: dockertest
       
   - name: docker_release_Bundle
     type: ReleaseBundle
     configuration:
-      sourceArtifactory: bindu_arti
+      sourceArtifactory: vijay_artifactory
       name: test_1
       version: v1.0  
       
   - name: docker_release_Bundle2
     type: ReleaseBundle
     configuration:
-      sourceArtifactory: bindu_arti
+      sourceArtifactory: vijay_artifactory
       name: dockertest
       version: foo
       isSigned: false     
@@ -42,7 +42,7 @@ resources:
 #   - name: docker_distribution
 #     type: DistributionRule
 #     configuration:
-#       sourceArtifactory: bindu_arti
+#       sourceArtifactory: vijay_artifactory
 #       cityName: "*"
 #       serviceName: "*"
 #       siteName: "*"
@@ -59,10 +59,10 @@ pipelines:
           # for docker:
           dockerFileLocation: . # required
           dockerFileName: Dockerfile     # required
-          dockerImageName: 34.66.110.173:8081/bindu_local/vijay  # required 
+          dockerImageName: 34.66.107.45/test-docker-local/vijay  # required 
           dockerImageTag: master #myimage_$pipeline_name.$run_number   # required
           integrations:
-            - name: bindu_arti
+            - name: vijay_artifactory
           inputResources:
             - name: dockerbuild    # required
 #             - artifactoryFileSpec      # optional
@@ -84,7 +84,7 @@ pipelines:
           nodePool: ubuntu16
           targetRepository: bindu_local  #required
           integrations:
-            - name: bindu_arti    # required
+            - name: vijay_artifactory    # required
           inputSteps:
             - name: dockerBuild     # required
 #           outputResources:
@@ -98,7 +98,7 @@ pipelines:
           nodePool: ubuntu16
           #inherits from bash
 #           integrations:
-#             - name: bindu_arti     # required
+#             - name: vijay_artifactory     # required
           inputSteps:
             - name: dockerPush     # required
           outputResources:
@@ -119,7 +119,7 @@ pipelines:
         configuration:
           nodePool: ubuntu16
           releaseBundleName: test_new_releaseb
-          releaseBundleVersion: v2.0.10
+          releaseBundleVersion: v2.0.20
           dryRun: false
           sign: false
           description: "testdocker description"
