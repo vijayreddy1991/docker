@@ -89,7 +89,7 @@ pipelines:
         configuration:
           targetRepository: test-maven-local
           inputResources:
-            - name: mvn_Build
+            - name: maven_Build
           outputResources:
             - name: maven_build_promote
             
