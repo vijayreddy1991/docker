@@ -41,6 +41,7 @@ pipelines:
       - name: mavenBuild
         type: MvnBuild
         configuration:
+          nodePool: ubuntu16        
           sourceLocation: ./artifactory-maven-plugin-example
           mvnCommand: clean install -f ./pom.xml
           configFileLocation: .
@@ -76,6 +77,7 @@ pipelines:
       - name: mavenpublish
         type: PublishBuildInfo
         configuration:
+          nodePool: ubuntu16        
           inputSteps:
             - name: mavenBuild
           outputResources:
@@ -87,6 +89,7 @@ pipelines:
       - name: mavenPromote
         type: PromoteBuild
         configuration:
+          nodePool: ubuntu16        
           targetRepository: test-maven-local
           inputResources:
             - name: maven_Build
@@ -96,6 +99,7 @@ pipelines:
       - name: mavenCreatebundle
         type: CreateReleaseBundle
         configuration:
+          nodePool: ubuntu16        
           releaseBundleName: mvnbundle
           releaseBundleVersion: v1.1.1
           dryRun: false
@@ -115,6 +119,7 @@ pipelines:
       - name: mavenSign
         type: SignReleaseBundle
         configuration:
+          nodePool: ubuntu16        
           inputResources:
             - name: maven_release_Bundle
           outputResources:
