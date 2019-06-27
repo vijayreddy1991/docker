@@ -59,7 +59,7 @@ pipelines:
         execution:
           onStart:
             - printenv
-           - pushd $res_mymvn_project_resourcePath
+           - pushd $res_maven_project_resourcePath
             - ls -la
             - apt install default-jdk
             - pushd /tmp 
