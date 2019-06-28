@@ -3,7 +3,7 @@ resources:
     type: GitRepo
     configuration:
       gitProvider: vijay_github
-      path: vijayreddy1991/docker
+      path: vijayreddy1991/project-examples
       sha: maven   
       
   - name: maven_Build
@@ -42,7 +42,7 @@ pipelines:
         type: MvnBuild
         configuration:
           nodePool: ubuntu16        
-          sourceLocation: ./artifactory-maven-plugin-example
+          sourceLocation: ./maven-example
           mvnCommand: clean install -f ./pom.xml
           configFileLocation: .
           configFileName: mvn-art-config
