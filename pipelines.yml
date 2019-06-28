@@ -62,7 +62,7 @@ pipelines:
             - printenv
 #            - pushd $res_maven_project_resourcePath
             - ls -la
-            - apt install default-jdk
+            - apt install -y default-jdk
             - pushd /tmp 
             - wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
             - tar xzvf apache-maven-3.6.1-bin.tar.gz
