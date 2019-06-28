@@ -24,7 +24,7 @@ resources:
     type: ReleaseBundle
     configuration:
       sourceArtifactory: vijay_artifactory
-      name: testmvn
+      name: mvntest
       version: v0.1      
       
   - name: maven_release_BundleSig
