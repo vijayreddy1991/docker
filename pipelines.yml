@@ -13,41 +13,41 @@ resources:
   - name: docker_Build
     type: BuildInfo
     configuration:
-      sourceArtifactory: vijay_artifactory
+      sourceArtifactory: art
       buildNumber: 1
       buildName: dockertest  
       
   - name: docker_build_promote
     type: BuildInfo
     configuration:
-      sourceArtifactory: vijay_artifactory
+      sourceArtifactory: art
       buildNumber: 1
       buildName: dockertest
       
   - name: docker_release_Bundle
     type: ReleaseBundle
     configuration:
-      sourceArtifactory: vijay_artifactory
-      name: test_1
+      sourceDistribution: dist
+      name: test-docker-local
       version: v1.0  
       
   - name: docker_release_Bundle2
     type: ReleaseBundle
     configuration:
-      sourceArtifactory: vijay_artifactory
-      name: dockertest
-      version: foo
+      sourceDistribution: dist
+      name: test-docker-local
+      version: v1.0
       isSigned: false     
 
-#   - name: docker_distribution
-#     type: DistributionRule
-#     configuration:
-#       sourceArtifactory: vijay_artifactory
-#       cityName: "*"
-#       serviceName: "*"
-#       siteName: "*"
-#       countryCodes:
-#         - CN
+  - name: docker_distribution
+    type: DistributionRule
+    configuration:
+      sourceDistribution: dist
+      cityName: "*"
+      serviceName: "*"
+      siteName: "*"
+      countryCodes:
+        - IN
 
 pipelines: 
   - name: docker
@@ -62,7 +62,7 @@ pipelines:
           dockerImageName: 34.66.107.45/test-docker-local/vijay  # required 
           dockerImageTag: master #myimage_$pipeline_name.$run_number   # required
           integrations:
-            - name: vijay_artifactory
+            - name: art
           inputResources:
             - name: dockerbuild    # required
 #             - artifactoryFileSpec      # optional
@@ -82,9 +82,9 @@ pipelines:
         type: DockerPush
         configuration:
           nodePool: ubuntu16
-          targetRepository: bindu_local  #required
+          targetRepository: test-docker-local  #required
           integrations:
-            - name: vijay_artifactory    # required
+            - name: art    # required
           inputSteps:
             - name: dockerBuild     # required
 #           outputResources:
@@ -118,7 +118,7 @@ pipelines:
         type: CreateReleaseBundle
         configuration:
           nodePool: ubuntu16
-          releaseBundleName: test_new_releaseb
+          releaseBundleName: test-docker-local
           releaseBundleVersion: v2.0.20
           dryRun: false
           sign: false
@@ -142,11 +142,12 @@ pipelines:
           outputResources:
             - name: docker_release_Bundle2
             
-#       - name: dockerDistribute
-#         type: DistributeReleaseBundle
-#         configuration:
-#           nodePool: ubuntu16
-#           dryRun: false
-#           inputResources:
-#             - name: docker_distribution
-#             - name: docker_release_Bundle2
+      - name: dockerDistribute
+        type: DistributeReleaseBundle
+        configuration:
+          dryRun: false
+          inputResources:
+            - name: docker_distribution
+            - name: docker_release_Bundle2
+          integrations: 
+            - name: dist             
