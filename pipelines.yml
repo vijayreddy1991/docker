@@ -60,7 +60,7 @@ pipelines:
           dockerFileLocation: . # required
           dockerFileName: Dockerfile     # required
           dockerImageName: 34.66.107.45/test-docker-local/vijay  # required 
-          dockerImageTag: master #myimage_$pipeline_name.$run_number   # required
+          dockerImageTag: latest #myimage_$pipeline_name.$run_number   # required
           integrations:
             - name: art
           inputResources:
