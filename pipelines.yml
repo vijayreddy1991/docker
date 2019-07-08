@@ -59,8 +59,8 @@ pipelines:
           # for docker:
           dockerFileLocation: . # required
           dockerFileName: Dockerfile     # required
-          dockerImageName: 34.66.107.45/test-docker-local/vijay  # required 
-          dockerImageTag: latest #myimage_$pipeline_name.$run_number   # required
+          dockerImageName: '34.66.107.45:8081/docker-stage-local/vijay'  # required 
+          dockerImageTag: myImg_$pipeline_name.$run_number #myimage_$pipeline_name.$run_number   # required
           integrations:
             - name: art
           inputResources:
